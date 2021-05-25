@@ -16,7 +16,7 @@ module.exports = {
                     })
                 }); */
 
-        client.user.setActivity(`créer des relations 💍`, { type: 'PLAYING' })
+        client.user.setActivity(`ajouter des commandes`, { type: 'PLAYING' })
 /* 
         const channel = client.channels.cache.get("840693678510047243");
 

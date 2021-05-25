@@ -6,7 +6,7 @@ module.exports = {
     name: 'guildDelete',
     execute(guild, client) {
 
-        const channel = client.channels.cache.get("846178183716012053");
+        /* const channel = client.channels.cache.get("846178183716012053");
 
         if (channel) {
             channel.send(
@@ -21,7 +21,7 @@ module.exports = {
                     .setThumbnail(guild.iconURL({ dynamic: true, size: 2048, format: 'png' }))
                     .setFooter(`ID : ${guild.id}`)
             )
-        }
+        } */
 
     },
 };

@@ -6,7 +6,7 @@ module.exports = {
     name: 'guildCreate',
     execute(guild, client) {
 
-        const channel = client.channels.cache.get("846178103293771846");
+        /* const channel = client.channels.cache.get("846178103293771846");
 
         if (channel) {
             channel.send(
@@ -21,7 +21,7 @@ module.exports = {
                     .setThumbnail(guild.iconURL({ dynamic: true, size: 2048, format: 'png' }))
                     .setFooter(`ID : ${guild.id}`)
             )
-        }
+        } */
 
     },
 };

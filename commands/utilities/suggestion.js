@@ -9,7 +9,7 @@ module.exports = {
     clientPermissions: ['EMBED_LINKS', 'USE_EXTERNAL_EMOJIS'],
     async execute(client, message, args) {
 
-        const msg = await client.channels.cache.get("844207071737675858").send(
+        const msg = await client.channels.cache.get("846798959569403934").send(
             new MessageEmbed()
                 .setColor("#f87359")
                 .setAuthor(message.author.tag, message.author.avatarURL({ dynamic: true }))

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const Discord = require("discord.js");
-const { token } = require("./config/config.json");
+const config = require("./config/config.json");
 const mysql = require('mysql');
 const chalk = require('chalk');
 const util = require('./templateMsg.js');
@@ -51,10 +51,11 @@ for (const folder of eventFolders) {
 
 const db = mysql.createPool({
   connectionLimit: 10,
-  host: "localhost",
-  user: "snow",
-  password: "nikzebi",
-  database: "foodiz",
+  host: config.db.host,
+  port: config.db.port,
+  user: config.db.user,
+  password: config.db.password,
+  database: config.db.database,
 });
 
 client.db = db;
@@ -86,4 +87,4 @@ db.getConnection(async function (err, con) {
 
 db.on('enqueue', function () { console.log(chalk.yellow(`[DB] Waiting for available connection slot`)); });
 
-client.login(token);
+client.login(config.token);

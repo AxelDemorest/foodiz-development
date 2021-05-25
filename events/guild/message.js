@@ -12,7 +12,7 @@ module.exports = {
             return false;
         }
 
-        const prefix = /* message.guild?.prefix ||  */'f-';
+        const prefix = /* message.guild?.prefix ||  */'.';
 
         if (!message.content.startsWith(prefix) || message.author.bot) return;
 
