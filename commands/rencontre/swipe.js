@@ -122,10 +122,10 @@ module.exports = {
                 .addField("Âge", `${moment(Date.now()).diff(moment(data[0].fz_users_naissance_date, "DD/MM/YYYY"), 'years')} ans *(${data[0].fz_users_naissance_date})*`, true)
                 .addField("Sexe", capitalizeFirstLetter(data[0].fz_users_sexe), true)
                 .addField("Situation", capitalizeFirstLetter(data[0].fz_users_situation), true)
-                .addField("Passion(s)", data[0].fz_users_passions, true)
                 .addField("Recherche", firstUser[0].fz_users_premium === "true" ? fruits_recherche[data[0].fz_users_recherche] : "**Fonctionnalité premium** <:diamond_premium:843067033125126175>", true)
                 .addField("Orientation sexuelle", data[0].fz_users_sexual_orientation === "deux" ? "Homme/Femme" : capitalizeFirstLetter(data[0].fz_users_sexual_orientation), true)
                 .addField("Localisation", capitalizeFirstLetter(data[0].fz_users_localisation), true)
+                .addField("Passion(s)", data[0].fz_users_passions)
                 .addField("Description", capitalizeFirstLetter(data[0].fz_users_description))
                 .setImage(data[0].fz_users_image)
         );
@@ -217,10 +217,10 @@ module.exports = {
                     .addField("Âge", `${moment(Date.now()).diff(moment(data[0].fz_users_naissance_date, "DD/MM/YYYY"), 'years')} ans *(${data[0].fz_users_naissance_date})*`, true)
                     .addField("Sexe", capitalizeFirstLetter(data[0].fz_users_sexe), true)
                     .addField("Situation", capitalizeFirstLetter(data[0].fz_users_situation), true)
-                    .addField("Passion(s)", data[0].fz_users_passions, true)
                     .addField("Recherche", firstUser[0].fz_users_premium === "true" ? fruits_recherche[data[0].fz_users_recherche] : "**Fonctionnalité premium** <:diamond_premium:843067033125126175>", true)
                     .addField("Orientation sexuelle", data[0].fz_users_sexual_orientation === "deux" ? "Homme/Femme" : capitalizeFirstLetter(data[0].fz_users_sexual_orientation), true)
                     .addField("Localisation", capitalizeFirstLetter(data[0].fz_users_localisation), true)
+                    .addField("Passion(s)", data[0].fz_users_passions)
                     .addField("Description", capitalizeFirstLetter(data[0].fz_users_description))
                     .setImage(data[0].fz_users_image)
             );
