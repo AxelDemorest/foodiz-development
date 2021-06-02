@@ -8,7 +8,7 @@ moment.locale('fr');
 module.exports = {
     name: 'bot-info',
     description: 'Afficher les informations concernant le bot.',
-    category: "<:information_foodiz:842899671625629767> - Information",
+    category: "<:info:848295171304325160> • Information",
     clientPermissions: ['EMBED_LINKS'],
     async execute(client, message, args) {
         const { commands } = client;

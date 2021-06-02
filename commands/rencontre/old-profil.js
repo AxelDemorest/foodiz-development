@@ -6,7 +6,7 @@ module.exports = {
     description: 'Gérer son profil Foodiz.',
     aliases: ['commands'],
     usage: '[command name]',
-    category: "<:conversation_foodiz:842900427381014569> - Rencontre",
+    category: "<:conversation_foodiz:842900427381014569> • Rencontre",
 	clientPermissions: ['EMBED_LINKS', 'USE_EXTERNAL_EMOJIS'],
     execute(client, message, args) {
 

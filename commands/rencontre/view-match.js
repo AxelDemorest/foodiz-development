@@ -4,7 +4,7 @@ const functionPage = require("../../function.js");
 module.exports = {
     name: 'view-match',
     description: 'Lister tous les utilisateurs avec qui tu as matché.',
-    category: "<:conversation_foodiz:842900427381014569> - Rencontre",
+    category: "<:conversation_foodiz:842900427381014569> • Rencontre",
     DMOnly: true,
     async execute(client, message, args) {
 

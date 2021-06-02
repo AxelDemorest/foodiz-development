@@ -19,7 +19,7 @@ Structures.extend('Guild', function(Guild) {
     return BotGuild;
 }); */
 
-const client = new Discord.Client({ ws: { intents: new Discord.Intents(Discord.Intents.ALL) } });
+const client = new Discord.Client({ ws: { intents: new Discord.Intents(Discord.Intents.ALL) }, partials: ['MESSAGE', 'REACTION'] });
 client.commands = new Discord.Collection();
 const commandFolders = fs.readdirSync("./commands");
 const eventFolders = fs.readdirSync("./events");

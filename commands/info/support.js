@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: 'support',
     description: 'Rejoindre le serveur support du bot.',
-    category: "<:information_foodiz:842899671625629767> - Information",
+    category: "<:info:848295171304325160> • Information",
     clientPermissions: ['EMBED_LINKS'],
     execute(client, message, args) {
         

@@ -6,7 +6,7 @@ module.exports = {
     usage: '<feedback>',
     aliases: ['note'],
     args: true,
-    category: "<:shield_foodiz:842900862333616150> - Utilitaire",
+    category: "<:secure:849567201459568661> • Utilitaire",
     clientPermissions: ['EMBED_LINKS', 'USE_EXTERNAL_EMOJIS'],
     execute(client, message, args) {
 

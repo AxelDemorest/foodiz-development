@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: 'foodiz-info',
     description: 'Afficher les statistiques totales de foodiz.',
-    category: "<:information_foodiz:842899671625629767> - Information",
+    category: "<:info:848295171304325160> • Information",
     clientPermissions: ['EMBED_LINKS'],
     async execute(client, message, args) {
 

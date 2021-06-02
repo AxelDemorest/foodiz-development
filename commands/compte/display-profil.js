@@ -6,7 +6,7 @@ module.exports = {
     description: 'Afficher son profil.',
     aliases: ['dp'],
     DMOnly: true,
-    category: '<:conversation_foodiz:842900427381014569> - Rencontre',
+    category: '<:account:848292297208234045> • Compte Foodiz',
     async execute(client, message, args) {
 
         function capitalizeFirstLetter(string) {
@@ -39,7 +39,7 @@ module.exports = {
             .addField("Sexe", capitalizeFirstLetter(data[0].fz_users_sexe), true)
             .addField("Situation", capitalizeFirstLetter(data[0].fz_users_situation), true)
             .addField("Recherche", fruits_recherche[data[0].fz_users_recherche], true)
-            .addField("Orientation sexuelle", capitalizeFirstLetter(data[0].fz_users_sexual_orientation), true)
+            .addField("Orientation sexuelle", data[0].fz_users_sexual_orientation === "deux" ? "Homme/Femme" : capitalizeFirstLetter(data[0].fz_users_sexual_orientation), true)
             .addField("Localisation", capitalizeFirstLetter(data[0].fz_users_localisation), true)
             .addField("Passion(s)", data[0].fz_users_passions)
             .addField("Description", capitalizeFirstLetter(data[0].fz_users_description))

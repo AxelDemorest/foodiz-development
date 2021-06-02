@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: 'begin',
     description: 'Quelques informations pour bien débuter.',
-    category: "<:playbutton:846833632999243797> - Débuter avec Foodiz",
+    category: "<:playbuttonfoodiz:848295692702842910> • Débuter avec Foodiz",
     clientPermissions: ['EMBED_LINKS'],
     execute(client, message, args) {
         

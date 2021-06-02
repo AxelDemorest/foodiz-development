@@ -5,7 +5,7 @@ module.exports = {
     name: 'view-like',
     description: 'Afficher un utilisateur qui t\'as liké.',
     aliases: ['vl'],
-    category: '<:conversation_foodiz:842900427381014569> - Rencontre',
+    category: '<:conversation_foodiz:842900427381014569> • Rencontre',
     DMOnly: true,
     premium: true,
     async execute(client, message, args) {

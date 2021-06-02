@@ -5,7 +5,7 @@ module.exports = {
     description: 'Gérer les notifications des likes.',
     aliases: ['commands'],
     usage: '[command name]',
-    category: '<:conversation_foodiz:842900427381014569> - Rencontre',
+    category: '<:conversation_foodiz:842900427381014569> • Rencontre',
 	clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'USE_EXTERNAL_EMOJIS'],
     async execute(client, message, args) {
 

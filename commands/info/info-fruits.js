@@ -2,8 +2,8 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: 'info-fruits',
-    description: 'Connaître les fruits existants.',
-    category: "<:information_foodiz:842899671625629767> - Information",
+    description: 'Se renseigner sur les fruits disponibles.',
+    category: "<:info:848295171304325160> • Information",
     clientPermissions: ['EMBED_LINKS'],
     execute(client, message, args) {
         

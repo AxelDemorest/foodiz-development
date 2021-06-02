@@ -17,7 +17,7 @@ module.exports = {
                     .addField("Nom du serveur", guild.name)
                     .addField("Nombre de membre", guild.members.cache.size)
                     .addField("Date de création", `\`${moment(guild.createdAt).format('DD MMMM YYYY')}\``)
-                    .addField("Owner", client.user.fetch(guild.ownerID))
+                    .addField("Owner", client.users.fetch(guild.ownerID))
                     .setThumbnail(guild.iconURL({ dynamic: true, size: 2048, format: 'png' }))
                     .setFooter(`ID : ${guild.id}`)
             )

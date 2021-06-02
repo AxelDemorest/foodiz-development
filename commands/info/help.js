@@ -5,22 +5,25 @@ module.exports = {
 	description: 'S\'informer sur toutes les commandes disponibles.',
 	usage: '[commande]',
 	aliases: ['h'],
-	category: "<:information_foodiz:842899671625629767> - Information",
+	category: "<:info:848295171304325160> • Information",
 	clientPermissions: ['EMBED_LINKS', 'USE_EXTERNAL_EMOJIS'],
 	execute(client, message, args) {
 		const { commands } = client;
 
 		const prefix = /* message.guild?.prefix ||  */'f-';
 
+		const embed = new MessageEmbed()
+			.setColor("#f87359")
+			.setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
+			.setTitle(`Besoin d'aide ?`)
+			.setDescription(`Utilise \`${prefix}help <command>\` pour plus d'informations.\n\n**Important**: La presque totalité des commandes doit s'utiliser dans les messages privés du bot. Si les tiens sont fermés, le bot sera inutilisable.\n\n**À noter:** Les commandes possédants une fonctionnalité premium sont accompagnées de l'emoji "<:diamond_premium:843067033125126175>".`)
+		client.categories.filter(category => message.author.id !== "378617147858878465" ? category !== "<:pinkcrown:843967542472474624> - Propriétaire" : category).map(cat => {
+			embed.addField(`• ${cat}`, client.commands.filter(cmd => cmd.category === cat).map(cmd => `> \`${cmd.name}\` : ${cmd.description} ${cmd.premium ? "<:diamond_premium:843067033125126175>" : ""}`).join('\n'))
+		});
+		embed.setThumbnail(client.user.avatarURL({ size: 2048, format: "png" }))
+
 		if (!args.length) {
-			return message.channel.send(
-				new MessageEmbed()
-					.setColor("#f87359")
-					.setAuthor(message.author.username, message.author.avatarURL({ dynamic: true }))
-					.setTitle(`Besoin d'aide ?`)
-					.setDescription(`Utilise \`${prefix}help <command>\` pour plus d'informations.\n\n**Important**: La presque totalité des commandes doit s'utiliser dans les messages privés du bot. Si les tiens sont fermés, le bot sera inutilisable.\n\n**À noter:** Les commandes possédants une fonctionnalité premium sont accompagnées de l'emoji "<:diamond_premium:843067033125126175>".\n\n${client.categories.filter(category => message.author.id !== "378617147858878465" ? category !== "<:pinkcrown:843967542472474624> - Propriétaire" : category).map(cat => `**${cat}:**\n${client.commands.filter(cmd => cmd.category === cat).map(cmd => `> \`${cmd.name}\` : ${cmd.description} ${cmd.premium ? "<:diamond_premium:843067033125126175>" : ""}`).join('\n')}`).join('\n\n')}`)
-					.setThumbnail(client.user.avatarURL({ size: 2048, format: "png" }))
-			);
+			return message.channel.send(embed);
 		}
 
 		const name = args[0].toLowerCase();

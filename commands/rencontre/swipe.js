@@ -4,7 +4,7 @@ const moment = require('moment');
 module.exports = {
     name: 'swipe',
     description: 'Générer des utilisateurs pour faire des rencontres.',
-    category: "<:conversation_foodiz:842900427381014569> - Rencontre",
+    category: "<:conversation_foodiz:842900427381014569> • Rencontre",
     DMOnly: true,
     async execute(client, message, args) {
 
@@ -42,7 +42,7 @@ module.exports = {
                     .setDescription(`Bravo ${message.author}, tu as matché avec **${userCibleUser.tag}**, tu peux demander en ami cet utilisateur sur discord et aller discuter.`)
             )
 
-        let objMatchUserAuthor = JSON.parse(userAuthor.fz_users_match) || [];
+            let objMatchUserAuthor = JSON.parse(userAuthor.fz_users_match) || [];
 
             objMatchUserAuthor.push(userCibleId);
 
@@ -112,7 +112,7 @@ module.exports = {
 
         }
 
-        if (data.length === 0) message.channel.send({ embed: client.util.errorMsg(message.author.tag, "Il n'y a personne à swipe, reviens plus tard.") })
+        if (data.length === 0) return message.channel.send({ embed: client.util.errorMsg(message.author.tag, "Il n'y a personne à swipe, reviens plus tard.") })
 
         const msg = await message.channel.send(
             new MessageEmbed()
@@ -125,7 +125,7 @@ module.exports = {
                 .addField("Recherche", firstUser[0].fz_users_premium === "true" ? fruits_recherche[data[0].fz_users_recherche] : "**Fonctionnalité premium** <:diamond_premium:843067033125126175>", true)
                 .addField("Orientation sexuelle", data[0].fz_users_sexual_orientation === "deux" ? "Homme/Femme" : capitalizeFirstLetter(data[0].fz_users_sexual_orientation), true)
                 .addField("Localisation", capitalizeFirstLetter(data[0].fz_users_localisation), true)
-                .addField("Passion(s)", data[0].fz_users_passions)
+                .addField("Passion(s)", data[0].fz_users_passions, true)
                 .addField("Description", capitalizeFirstLetter(data[0].fz_users_description))
                 .setImage(data[0].fz_users_image)
         );
@@ -136,45 +136,44 @@ module.exports = {
 
         collector.on('collect', async reaction => {
 
-            if (reaction.emoji.name === "heart_like") {
-
-                await client.db.query("INSERT INTO fz_swipes(fz_swipes_id_user_author, fz_swipes_id_user_cible, fz_swipes_status_swipe) VALUES(?,?,?)", [message.author.id, data[0].fz_users_id_user_discord, "like"], (error, rows) => {
-                    if (error) throw error;
-                });
-
-                const queryMatch = await client.db.asyncQuery(`SELECT * FROM fz_swipes WHERE fz_swipes_id_user_author = '${data[0].fz_users_id_user_discord}' AND fz_swipes_id_user_cible = '${message.author.id}' AND fz_swipes_status_swipe = 'like'`).catch(console.error);
-
-                if (queryMatch.length > 0) {
-
-                    checkMatchBetweenUsers(message, firstUser[0], data[0]);
-
-                } else {
-
-                    if (data[0].fz_users_notification_like === 'on') {
-
-                        let userCibleNotif = await client.users.fetch(data[0].fz_users_id_user_discord);
-
-                        if (userCibleNotif) userCibleNotif.send(
-                            new MessageEmbed()
-                                .setColor("#f87359")
-                                .setTitle("Nouveau like ! <:foodiz:835923851418140702>")
-                                .setDescription(`Un utilisateur t'as envoyé un like, utilise la commande \`f-swipe\` pour tenter de découvrir qui est cet utilisateur!\n\n**Premium**: Tu peux également découvrir qui t'as liké en utilisant la commande premium \`f-view-like\`.`)
-                        ).catch(() => message.author.send({ embed: client.util.errorMsg(message.author.tag, "Désolé, cet utilisateur n'a plus ses messages privés ouverts. Il n'a pas pu être notifié.") }))
-                        else message.author.send({ embed: client.util.errorMsg(message.author.tag, "Désolé, cet utilisateur est introuvable. Il n'a pas pu être notifié.") })
+            switch (reaction.emoji.name) {
+                case "heart_like":
+                    const checkLike = await client.db.asyncQuery(`SELECT * FROM fz_swipes WHERE fz_swipes_id_user_author = '${message.author.id}' AND fz_swipes_id_user_cible = '${data[0].fz_users_id_user_discord}' AND fz_swipes_status_swipe = 'like'`).catch(console.error);
+                    if (checkLike.length === 0) {
+                        await client.db.query("INSERT INTO fz_swipes(fz_swipes_id_user_author, fz_swipes_id_user_cible, fz_swipes_status_swipe) VALUES(?,?,?)", [message.author.id, data[0].fz_users_id_user_discord, "like"], (error, rows) => {
+                            if (error) throw error;
+                        });
                     }
-                }
 
-            } else if (reaction.emoji.name === "donotdisturb") {
+                    const queryMatch = await client.db.asyncQuery(`SELECT * FROM fz_swipes WHERE fz_swipes_id_user_author = '${data[0].fz_users_id_user_discord}' AND fz_swipes_id_user_cible = '${message.author.id}' AND fz_swipes_status_swipe = 'like'`).catch(console.error);
+                    if (queryMatch.length > 0) {
+                        checkMatchBetweenUsers(message, firstUser[0], data[0]);
+                    } else {
+                        if (data[0].fz_users_notification_like === 'on') {
+                            let userCibleNotif = await client.users.fetch(data[0].fz_users_id_user_discord);
+                            if (userCibleNotif) userCibleNotif.send(
+                                new MessageEmbed()
+                                    .setColor("#f87359")
+                                    .setTitle("Nouveau like ! <:foodiz:835923851418140702>")
+                                    .setDescription(`Un utilisateur t'as envoyé un like, utilise la commande \`f-swipe\` pour tenter de découvrir qui est cet utilisateur!\n\n**Premium**: Tu peux également découvrir qui t'as liké en utilisant la commande premium \`f-view-like\`.`)
+                            ).catch(() => message.author.send({ embed: client.util.errorMsg(message.author.tag, "Désolé, cet utilisateur n'a plus ses messages privés ouverts. Il n'a pas pu être notifié.") }))
+                            else message.author.send({ embed: client.util.errorMsg(message.author.tag, "Désolé, cet utilisateur est introuvable. Il n'a pas pu être notifié.") })
+                        }
+                    }
+                    break;
 
-                await client.db.query("INSERT INTO fz_swipes(fz_swipes_id_user_author, fz_swipes_id_user_cible, fz_swipes_status_swipe) VALUES(?,?,?)", [message.author.id, data[0].fz_users_id_user_discord, "dislike"], (error, rows) => {
-                    if (error) throw error;
-                });
+                case "donotdisturb":
+                    const checkDislike = await client.db.asyncQuery(`SELECT * FROM fz_swipes WHERE fz_swipes_id_user_author = '${message.author.id}' AND fz_swipes_id_user_cible = '${data[0].fz_users_id_user_discord}' AND fz_swipes_status_swipe = 'dislike'`).catch(console.error);
+                    if (checkDislike.length === 0) {
+                        await client.db.query("INSERT INTO fz_swipes(fz_swipes_id_user_author, fz_swipes_id_user_cible, fz_swipes_status_swipe) VALUES(?,?,?)", [message.author.id, data[0].fz_users_id_user_discord, "dislike"], (error, rows) => {
+                            if (error) throw error;
+                        });
+                    }
+                    break;
 
-            } else if (reaction.emoji.name === "close_foodiz") {
-
-                collector.stop();
-                return msg.edit({ embed: client.util.successMsg(message.author.tag, "Commande quittée avec succès !") });
-
+                case "close_foodiz":
+                    collector.stop();
+                    return msg.edit({ embed: client.util.successMsg(message.author.tag, "Commande quittée avec succès !") });
             }
 
             data = await client.db.asyncQuery(
@@ -193,7 +192,7 @@ module.exports = {
                                     AND fz_users_id_user_discord != '${message.author.id}' AND fz_users_checked = 1`
                 ).catch(console.error);
 
-                const filterResult = filterUsers(firstUser[0].fz_users_filters, data);
+                const filterResult = await filterUsers(firstUser[0].fz_users_filters, data);
 
                 if (filterResult.length === 0) {
                     collector.stop();
@@ -220,7 +219,7 @@ module.exports = {
                     .addField("Recherche", firstUser[0].fz_users_premium === "true" ? fruits_recherche[data[0].fz_users_recherche] : "**Fonctionnalité premium** <:diamond_premium:843067033125126175>", true)
                     .addField("Orientation sexuelle", data[0].fz_users_sexual_orientation === "deux" ? "Homme/Femme" : capitalizeFirstLetter(data[0].fz_users_sexual_orientation), true)
                     .addField("Localisation", capitalizeFirstLetter(data[0].fz_users_localisation), true)
-                    .addField("Passion(s)", data[0].fz_users_passions)
+                    .addField("Passion(s)", data[0].fz_users_passions, true)
                     .addField("Description", capitalizeFirstLetter(data[0].fz_users_description))
                     .setImage(data[0].fz_users_image)
             );
@@ -228,7 +227,7 @@ module.exports = {
         });
 
         collector.on('end', collected => {
-            msg.edit({ embed: client.util.errorMsg(message.author.tag, "Temps écoulé, la commande a été quittée.") })
+            message.channel.send({ embed: client.util.errorMsg(message.author.tag, "La commande a été quittée.") })
         });
     },
 };

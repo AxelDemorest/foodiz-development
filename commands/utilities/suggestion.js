@@ -5,7 +5,7 @@ module.exports = {
     description: 'Envoyer une suggestion à l\'équipe technique.',
     usage: '<suggestion>',
     args: true,
-    category: "<:shield_foodiz:842900862333616150> - Utilitaire",
+    category: "<:secure:849567201459568661> • Utilitaire",
     clientPermissions: ['EMBED_LINKS', 'USE_EXTERNAL_EMOJIS'],
     async execute(client, message, args) {
 

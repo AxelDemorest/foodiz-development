@@ -14,7 +14,7 @@ module.exports = {
     description: 'Commande pour exécuter un code.',
     aliases: ['commands'],
     usage: '[command name]',
-    category: "<:pinkcrown:843967542472474624> - Propriétaire",
+    category: "<:pinkcrown:843967542472474624> • Propriétaire",
     clientPermissions: ['EMBED_LINKS'],
     ownerOnly: true,
     execute(client, msg, args) {

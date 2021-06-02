@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 module.exports = {
     name: 'check-user',
     description: 'Vérifier un utilisateur.',
-    category: "<:pinkcrown:843967542472474624> - Propriétaire",
+    category: "<:pinkcrown:843967542472474624> • Propriétaire",
     clientPermissions: ['EMBED_LINKS'],
     args: true,
     guildOnly: true,

@@ -5,7 +5,7 @@ module.exports = {
     description: 'Ajouter des filtres pour les swipes.',
     aliases: ['commands'],
     usage: '[filter 1] [filter 2] / ["delete"] [filter 1 | "all"]',
-    category: '<:conversation_foodiz:842900427381014569> - Rencontre',
+    category: '<:conversation_foodiz:842900427381014569> • Rencontre',
     DMOnly: true,
     async execute(client, message, args) {
 
